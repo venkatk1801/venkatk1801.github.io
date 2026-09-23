@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Venkat — Cloud Software Engineer & AI Data Engineer</title>
+<meta name="description" content="Portfolio of Venkat: Cloud Software Engineer and AI Data Engineer building cloud-native apps, data platforms, and AI-powered tools." />
+<style>
+  :root{
+    --bg:#0f1420; --bg2:#161c2e; --card:#1a2138; --line:#2a3352;
+    --txt:#e8ecf5; --muted:#9aa6c4; --acc:#00c2ff; --acc2:#7c3aed;
+    --grad:linear-gradient(120deg,#00c2ff,#7c3aed);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
+    background:var(--bg);color:var(--txt);line-height:1.7;overflow-x:hidden}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
+
+  /* nav */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(12px);
+    background:rgba(15,20,32,.75);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .logo{font-weight:800;font-size:1.2rem;background:var(--grad);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .links{display:flex;gap:1.4rem;font-size:.95rem}
+  .links a{text-decoration:none;color:var(--muted);transition:color .2s}
+  .links a:hover{color:var(--acc)}
+  @media(max-width:640px){.links{gap:.9rem;font-size:.85rem}}
+
+  /* hero */
+  header{min-height:92vh;display:flex;align-items:center;position:relative;
+    background:radial-gradient(800px 400px at 20% 20%,rgba(0,194,255,.12),transparent 60%),
+               radial-gradient(700px 380px at 85% 75%,rgba(124,58,237,.14),transparent 60%)}
+  .kicker{color:var(--acc);font-weight:600;letter-spacing:.12em;text-transform:uppercase;font-size:.8rem}
+  h1{font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.15;margin:.6rem 0}
+  .typed{color:transparent;background:var(--grad);-webkit-background-clip:text;background-clip:text}
+  .caret{display:inline-block;width:3px;height:1em;background:var(--acc);margin-left:2px;
+    vertical-align:-0.12em;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .lede{color:var(--muted);max-width:620px;font-size:1.08rem;margin:1rem 0 2rem}
+  .cta{display:flex;gap:1rem;flex-wrap:wrap}
+  .btn{display:inline-block;padding:.8rem 1.6rem;border-radius:999px;font-weight:700;
+    text-decoration:none;transition:transform .15s,box-shadow .15s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn.primary{background:var(--grad);color:#fff;box-shadow:0 8px 24px rgba(0,194,255,.25)}
+  .btn.ghost{border:1px solid var(--line);color:var(--txt)}
+  .btn.ghost:hover{border-color:var(--acc)}
+
+  section{padding:4.5rem 0}
+  h2{font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:.4rem}
+  h2 .dot{color:var(--acc)}
+  .sub{color:var(--muted);margin-bottom:2.2rem}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1fr;gap:1.5rem}
+  .about-grid ul{list-style:none;display:grid;gap:1rem}
+  .about-grid li{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.3rem}
+
+  /* stack */
+  .badges{display:flex;flex-wrap:wrap;gap:.6rem}
+  .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;
+    padding:.45rem 1rem;font-size:.9rem;color:var(--muted);transition:.2s}
+  .badge:hover{border-color:var(--acc);color:var(--txt);transform:translateY(-2px)}
+
+  /* projects */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.3rem}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;
+    display:flex;flex-direction:column;gap:.7rem;transition:transform .18s,border-color .18s,box-shadow .18s;
+    text-decoration:none}
+  .card:hover{transform:translateY(-5px);border-color:var(--acc);box-shadow:0 14px 34px rgba(0,194,255,.12)}
+  .card .ico{font-size:1.7rem}
+  .card h3{font-size:1.15rem}
+  .card p{color:var(--muted);font-size:.95rem;flex:1}
+  .tags{display:flex;flex-wrap:wrap;gap:.4rem}
+  .tag{font-size:.75rem;background:rgba(0,194,255,.1);color:var(--acc);
+    border-radius:999px;padding:.15rem .7rem}
+  .card .go{color:var(--acc);font-weight:600;font-size:.9rem}
+
+  /* stats */
+  .stats{display:flex;flex-wrap:wrap;gap:1.2rem;justify-content:center}
+  .stats img{border-radius:12px;max-width:100%}
+
+  /* contact */
+  .contact-box{background:var(--bg2);border:1px solid var(--line);border-radius:18px;
+    padding:2.5rem;text-align:center}
+  .contact-box p{color:var(--muted);margin:.8rem 0 1.6rem}
+
+  footer{border-top:1px solid var(--line);padding:1.6rem 0;color:var(--muted);
+    font-size:.88rem;text-align:center}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">VK</a>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#stack">Stack</a>
+      <a href="#projects">Projects</a>
+      <a href="#stats">Stats</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="wrap">
+    <div class="kicker">👋 Hi, I'm</div>
+    <h1>Venkat<br/><span class="typed" id="typed"></span><span class="caret"></span></h1>
+    <p class="lede">I build scalable cloud-native applications, AI-powered data platforms, and modern distributed systems — and I ship side projects for fun.</p>
+    <div class="cta">
+      <a class="btn primary" href="#projects">View my work</a>
+      <a class="btn ghost" href="https://github.com/venkatk1801" target="_blank" rel="noopener">GitHub profile</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <h2>About<span class="dot">.</span></h2>
+    <p class="sub">Cloud Software Engineer • AI Data Engineer — Dallas, TX</p>
+    <div class="about-grid">
+      <ul>
+        <li>☁️ I specialize in cloud-native applications and distributed systems that scale.</li>
+        <li>🤖 I'm deep into Generative AI — LLM-powered solutions, RAG, and intelligent data platforms.</li>
+        <li>⚡ I design batch &amp; real-time data pipelines with Azure, Databricks, Kafka, Snowflake, and PySpark.</li>
+        <li>🚀 Currently exploring AI agents, MCP servers, Azure AI Foundry, and Kubernetes.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <h2>Tech stack<span class="dot">.</span></h2>
+    <p class="sub">Tools I reach for most</p>
+    <div class="badges">
+      <span class="badge">Python</span><span class="badge">Java</span><span class="badge">SQL</span>
+      <span class="badge">Azure</span><span class="badge">Databricks</span><span class="badge">PySpark</span>
+      <span class="badge">Apache Spark</span><span class="badge">Kafka</span><span class="badge">Snowflake</span>
+      <span class="badge">dbt</span><span class="badge">Docker</span><span class="badge">Kubernetes</span>
+      <span class="badge">Terraform</span><span class="badge">GitHub Actions</span><span class="badge">Azure DevOps</span>
+      <span class="badge">OpenAI</span><span class="badge">Claude</span><span class="badge">LangChain</span>
+      <span class="badge">Redis</span><span class="badge">Postgres</span><span class="badge">FastAPI</span>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects<span class="dot">.</span></h2>
+    <p class="sub">A few things I've built and shipped</p>
+    <div class="grid">
+      <a class="card reveal" href="https://github.com/venkatk1801/smart-trade-journal" target="_blank" rel="noopener">
+        <div class="ico">📈</div><h3>smart-trade-journal</h3>
+        <p>Trading journal with P&amp;L tracking, PDT day-trade warnings, and one-command HTML reports.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">CLI</span></div>
+        <div class="go">View on GitHub →</div>
+      </a>
+      <a class="card reveal" href="https://github.com/venkatk1801/jd-matcher" target="_blank" rel="noopener">
+        <div class="ico">🎯</div><h3>jd-matcher</h3>
+        <p>Resume vs. job-description keyword gap analyzer — a tailoring guide for every application.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">NLP</span></div>
+        <div class="go">View on GitHub →</div>
+      </a>
+      <a class="card reveal" href="https://github.com/venkatk1801/pagesmith" target="_blank" rel="noopener">
+        <div class="ico">✍️</div><h3>pagesmith</h3>
+        <p>Zero-dependency static site generator: Markdown in, blog + RSS out, with live reload.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">SSG</span></div>
+        <div class="go">View on GitHub →</div>
+      </a>
+      <a class="card reveal" href="https://github.com/venkatk1801/visa-slot-notifier" target="_blank" rel="noopener">
+        <div class="ico">🔔</div><h3>visa-slot-notifier</h3>
+        <p>Poll appointment slots with pluggable checkers and get pinged the moment one opens.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Automation</span></div>
+        <div class="go">View on GitHub →</div>
+      </a>
+      <a class="card reveal" href="https://github.com/venkatk1801/bitcoin-price-api" target="_blank" rel="noopener">
+        <div class="ico">₿</div><h3>bitcoin-price-api</h3>
+        <p>Real-time Bitcoin price tracker API (FastAPI + CoinGecko) with a live Chart.js dashboard.</p>
+        <div class="tags"><span class="tag">FastAPI</span><span class="tag">JavaScript</span></div>
+        <div class="go">View on GitHub →</div>
+      </a>
+      <a class="card reveal" href="https://github.com/venkatk1801/fast-api-graphQL" target="_blank" rel="noopener">
+        <div class="ico">🔌</div><h3>fast-api-graphQL</h3>
+        <p>FastAPI + GraphQL experiments — schemas, resolvers, and API design patterns.</p>
+        <div class="tags"><span class="tag">FastAPI</span><span class="tag">GraphQL</span></div>
+        <div class="go">View on GitHub →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="stats">
+  <div class="wrap">
+    <h2>GitHub stats<span class="dot">.</span></h2>
+    <p class="sub">Live from my GitHub activity</p>
+    <div class="stats">
+      <img src="https://github-readme-stats.vercel.app/api?username=venkatk1801&show_icons=true&theme=tokyonight&hide_border=true" alt="GitHub stats" />
+      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=venkatk1801&layout=compact&theme=tokyonight&hide_border=true" alt="Top languages" />
+      <img src="https://github-readme-streak-stats.herokuapp.com/?user=venkatk1801&theme=tokyonight&hide_border=true" alt="Contribution streak" />
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box reveal">
+      <h2>Let's build something<span class="dot">.</span></h2>
+      <p>Open to Cloud Software Engineering, AI Engineering &amp; Data Engineering opportunities.</p>
+      <div class="cta" style="justify-content:center">
+        <a class="btn primary" href="https://github.com/venkatk1801" target="_blank" rel="noopener">Find me on GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 Venkat · Built by hand, hosted on GitHub Pages</div>
+</footer>
+
+<script>
+  // typing effect
+  const roles = ["Cloud Software Engineer.", "AI Data Engineer.", "Data Pipeline Builder.", "Side-Project Shipper."];
+  const el = document.getElementById("typed");
+  let ri = 0, ci = 0, del = false;
+  (function tick(){
+    const word = roles[ri];
+    el.textContent = word.slice(0, ci);
+    let wait = del ? 32 : 62;
+    if(!del && ci === word.length){ wait = 1600; del = true; }
+    else if(del && ci === 0){ del = false; ri = (ri + 1) % roles.length; wait = 350; }
+    ci += del ? -1 : 1;
+    setTimeout(tick, wait);
+  })();
+
+  // reveal on scroll
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+  }), {threshold: .12});
+  document.querySelectorAll(".reveal").forEach(n => io.observe(n));
+  document.querySelectorAll("section .wrap > h2, section .wrap > .sub").forEach(n => {
+    n.classList.add("reveal"); io.observe(n);
+  });
+</script>
+</body>
+</html>
