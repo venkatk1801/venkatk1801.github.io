@@ -1,307 +1,739 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Venkat — Cloud Software Engineer & AI Data Engineer</title>
-<meta name="description" content="Portfolio of Venkat: Cloud Software Engineer and AI Data Engineer building cloud-native apps, data platforms, and AI-powered tools." />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>venkat's store — open-source projects, now with free delivery</title>
+<meta name="description" content="Venkat's open-source projects, served Amazon-style: AI agents, MCP servers, trading tools and dev utilities. Everything free, everything open source.">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="venkat's store">
+<meta property="og:title" content="venkat's store — open-source projects, now with free delivery">
+<meta property="og:description" content="Venkat's open-source projects, served Amazon-style: AI agents, MCP servers, trading tools and dev utilities. Everything free, everything open source.">
+<meta property="og:url" content="https://venkatk1801.github.io/">
+<meta property="og:image" content="https://venkatk1801.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="venkat's store — open-source projects, now with free delivery">
+<meta name="twitter:description" content="Venkat's open-source projects, served Amazon-style: AI agents, MCP servers, trading tools and dev utilities. Everything free, everything open source.">
+<meta name="twitter:image" content="https://venkatk1801.github.io/og-image.png">
 <style>
-  :root{
-    --bg:#0b0f1c; --bg2:#121830; --card:#161d38; --line:#2b3560;
-    --txt:#eef1fb; --muted:#9aa6c9;
-    --cyan:#00c2ff; --violet:#7c3aed; --pink:#ff4ecd; --lime:#a3ff5e;
-    --grad:linear-gradient(120deg,#00c2ff,#7c3aed,#ff4ecd);
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
-    background:var(--bg);color:var(--txt);line-height:1.7;overflow-x:hidden}
-  a{color:inherit}
-  ::selection{background:var(--violet);color:#fff}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
-
-  /* aurora background */
-  .orb{position:fixed;border-radius:50%;filter:blur(90px);opacity:.35;z-index:0;pointer-events:none}
-  .orb.o1{width:480px;height:480px;background:#00c2ff;top:-140px;left:-120px;animation:drift 18s ease-in-out infinite alternate}
-  .orb.o2{width:520px;height:520px;background:#7c3aed;top:30%;right:-180px;animation:drift 22s ease-in-out infinite alternate-reverse}
-  .orb.o3{width:420px;height:420px;background:#ff4ecd;bottom:-160px;left:30%;animation:drift 26s ease-in-out infinite alternate}
-  @keyframes drift{to{transform:translate(60px,40px) scale(1.12)}}
-
-  /* scroll progress */
-  #progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:60;background:var(--grad)}
-
-  /* nav */
-  nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(14px);
-    background:rgba(11,15,28,.72);border-bottom:1px solid var(--line)}
-  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
-  .logo{font-weight:900;font-size:1.35rem;background:var(--grad);background-size:200%;
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    animation:sheen 6s linear infinite}
-  @keyframes sheen{to{background-position:200%}}
-  .links{display:flex;gap:1.4rem;font-size:.95rem}
-  .links a{text-decoration:none;color:var(--muted);transition:color .2s;font-weight:600}
-  .links a:hover{color:var(--cyan)}
-  @media(max-width:640px){.links{gap:.9rem;font-size:.85rem}}
-
-  main,header,footer,nav{position:relative;z-index:1}
-
-  /* hero */
-  header{min-height:94vh;display:flex;align-items:center}
-  .kicker{display:inline-block;color:#04121f;font-weight:800;letter-spacing:.1em;
-    text-transform:uppercase;font-size:.75rem;background:var(--grad);
-    padding:.35rem 1rem;border-radius:999px;margin-bottom:1.2rem}
-  h1{font-size:clamp(2.6rem,7vw,4.6rem);line-height:1.12;margin:.4rem 0 1rem;font-weight:900}
-  h1 .name{background:var(--grad);background-size:200%;
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    animation:sheen 7s linear infinite}
-  .typed{color:var(--cyan);text-shadow:0 0 24px rgba(0,194,255,.55)}
-  .caret{display:inline-block;width:4px;height:1em;background:var(--pink);margin-left:3px;
-    vertical-align:-0.12em;animation:blink 1s steps(1) infinite;box-shadow:0 0 12px var(--pink)}
-  @keyframes blink{50%{opacity:0}}
-  .lede{color:var(--muted);max-width:640px;font-size:1.12rem;margin:1rem 0 2rem}
-  .lede b{color:var(--txt)}
-  .cta{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
-  .btn{display:inline-block;padding:.85rem 1.8rem;border-radius:999px;font-weight:800;
-    text-decoration:none;transition:transform .15s,box-shadow .2s}
-  .btn:hover{transform:translateY(-3px)}
-  .btn.primary{background:var(--grad);background-size:180%;color:#fff;
-    box-shadow:0 10px 30px rgba(124,58,237,.45)}
-  .btn.primary:hover{box-shadow:0 14px 40px rgba(255,78,205,.5);background-position:90%}
-  .btn.ghost{border:1px solid var(--line);color:var(--txt);background:rgba(22,29,56,.6)}
-  .btn.ghost:hover{border-color:var(--cyan);box-shadow:0 0 20px rgba(0,194,255,.25)}
-  .socials{display:flex;gap:.7rem;margin-top:1.6rem;flex-wrap:wrap}
-  .socials img{height:30px;border-radius:6px;transition:transform .15s}
-  .socials a:hover img{transform:translateY(-3px) scale(1.05)}
-
-  section{padding:4.5rem 0}
-  h2{font-size:clamp(1.7rem,3.6vw,2.3rem);margin-bottom:.3rem;font-weight:900}
-  h2 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .bar{width:64px;height:5px;border-radius:99px;background:var(--grad);
-    box-shadow:0 0 16px rgba(124,58,237,.7);margin:.5rem 0 1.6rem}
-  .sub{color:var(--muted);margin-bottom:2.2rem}
-
-  /* about */
-  .about-grid ul{list-style:none;display:grid;gap:1rem}
-  .about-grid li{background:linear-gradient(180deg,rgba(22,29,56,.9),rgba(22,29,56,.55));
-    border:1px solid var(--line);border-radius:16px;padding:1.15rem 1.35rem;
-    transition:transform .18s,border-color .18s,box-shadow .18s}
-  .about-grid li:hover{transform:translateX(6px);border-color:var(--cyan);
-    box-shadow:-4px 0 24px rgba(0,194,255,.25)}
-  .about-grid li b{color:var(--cyan)}
-
-  /* stack */
-  .badges{display:flex;flex-wrap:wrap;gap:.65rem}
-  .badge{background:rgba(22,29,56,.7);border:1px solid var(--line);border-radius:999px;
-    padding:.5rem 1.1rem;font-size:.92rem;color:var(--muted);font-weight:600;
-    transition:all .2s;cursor:default}
-  .badge:hover{border-color:transparent;color:#fff;transform:translateY(-3px);
-    background:var(--grad);box-shadow:0 8px 22px rgba(124,58,237,.4)}
-
-  /* projects */
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.3rem}
-  .card{position:relative;background:linear-gradient(180deg,#181f3d,#141a33);
-    border:1px solid var(--line);border-radius:18px;padding:1.6rem;
-    display:flex;flex-direction:column;gap:.7rem;transition:transform .2s,box-shadow .2s;
-    text-decoration:none;overflow:hidden}
-  .card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;
-    background:var(--grad);opacity:0;transition:opacity .2s}
-  .card:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(124,58,237,.35);
-    border-color:rgba(124,58,237,.6)}
-  .card:hover::before{opacity:1}
-  .card .ico{font-size:1.9rem;filter:drop-shadow(0 4px 10px rgba(0,194,255,.4))}
-  .card h3{font-size:1.18rem}
-  .card h3 .hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .card p{color:var(--muted);font-size:.95rem;flex:1}
-  .tags{display:flex;flex-wrap:wrap;gap:.4rem}
-  .tag{font-size:.75rem;font-weight:700;background:rgba(0,194,255,.12);color:var(--cyan);
-    border:1px solid rgba(0,194,255,.3);border-radius:999px;padding:.18rem .75rem}
-  .card .go{color:var(--pink);font-weight:800;font-size:.92rem}
-
-  /* contact */
-  .contact-wrap{background:var(--grad);border-radius:22px;padding:2px;
-    box-shadow:0 0 44px rgba(124,58,237,.35)}
-  .contact-box{background:#10152a;border-radius:20px;padding:3rem 2rem;text-align:center}
-  .contact-box p{color:var(--muted);margin:.8rem 0 1.8rem;max-width:520px;margin-left:auto;margin-right:auto}
-  .contact-box .socials{justify-content:center;margin-top:1.8rem}
-
-  footer{border-top:1px solid var(--line);padding:2rem 0 1.6rem;color:var(--muted);
-    font-size:.88rem;text-align:center}
-  footer .socials{justify-content:center;margin:0 0 1rem}
-
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .65s,transform .65s}
-  .reveal.in{opacity:1;transform:none}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,sans-serif;background:#e3e6e6;color:#0f1111;-webkit-font-smoothing:antialiased}
+/* ============ HEADER ============ */
+.topbar{background:#131921;color:#fff;display:flex;align-items:center;gap:8px;padding:8px 16px;position:sticky;top:0;z-index:200;flex-wrap:wrap}
+.hbtn{border:1px solid transparent;border-radius:2px;padding:5px 8px;color:#fff;text-decoration:none;cursor:pointer;background:transparent}
+.hbtn:hover{border-color:#fff}
+.logo-wrap{position:relative;padding:5px 10px 10px 8px;cursor:pointer;border:1px solid transparent;border-radius:2px}
+.logo-wrap:hover{border-color:#fff}
+.logo{font-size:30px;font-weight:800;letter-spacing:-1.5px;color:#fff;line-height:1}
+.smile{position:absolute;left:8px;bottom:0;width:calc(100% - 16px);height:12px}
+.deliver{display:flex;align-items:flex-start;gap:4px}
+.deliver .pin{font-size:16px;margin-top:8px}
+.small{font-size:11px;color:#ccc;line-height:1.3}
+.bold{font-size:14px;font-weight:700;line-height:1.3;white-space:nowrap}
+.searchbar{flex:1;display:flex;height:42px;border-radius:4px;overflow:hidden;min-width:220px}
+.searchbar:focus-within{box-shadow:0 0 0 3px #ff9900}
+#searchCat{background:#f3f3f3;border:none;border-right:1px solid #cdcdcd;padding:0 6px;font-size:12px;color:#555;max-width:110px;outline:none;cursor:pointer}
+#searchCat:hover{background:#dadada}
+#searchInput{flex:1;border:none;padding:0 12px;font-size:15px;outline:none;min-width:0}
+#searchBtn{background:#febd69;border:none;width:50px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+#searchBtn:hover{background:#f3a847}
+.cart{position:relative;display:flex;align-items:flex-end;gap:2px}
+.cart svg{display:block}
+.cart-count{position:absolute;top:-4px;left:50%;transform:translateX(-50%);color:#f08804;font-weight:700;font-size:17px;line-height:1}
+/* ============ SUB NAV ============ */
+.subnav{background:#232f3e;display:flex;align-items:center;gap:2px;padding:5px 12px;overflow-x:auto}
+.subnav a{color:#fff;text-decoration:none;font-size:14px;padding:7px 10px;white-space:nowrap;border:1px solid transparent;border-radius:2px;cursor:pointer}
+.subnav a:hover{border-color:#fff}
+.subnav a.active{border-color:#fff;font-weight:700}
+.deal-dot{color:#ff9900;font-weight:700}
+/* ============ HERO ============ */
+.hero{position:relative}
+.slides{position:relative;height:320px;overflow:hidden}
+.slide{position:absolute;inset:0;display:flex;align-items:center;opacity:0;transition:opacity .6s ease;pointer-events:none}
+.slide.active{opacity:1;pointer-events:auto}
+.slide-inner{padding:0 9%;max-width:900px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.4)}
+.eyebrow{display:inline-block;background:rgba(0,0,0,.35);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:3px;margin-bottom:12px}
+.slide h1{font-size:42px;margin:0 0 10px;line-height:1.15}
+.slide p{font-size:17px;margin:0 0 20px;max-width:560px}
+.shop-now{background:#ffd814;border:1px solid #fcd200;border-radius:20px;padding:11px 30px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.shop-now:hover{background:#f7ca00}
+.hero-arrow{position:absolute;top:50%;transform:translateY(-50%);width:56px;height:88px;font-size:38px;color:#fff;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:6px;cursor:pointer;z-index:5;line-height:1}
+.hero-arrow:hover{background:rgba(255,255,255,.35)}
+#heroPrev{left:14px}#heroNext{right:14px}
+.hero-dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:9px;z-index:5}
+.dot{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.45);border:1px solid rgba(0,0,0,.2);cursor:pointer;padding:0}
+.dot.active{background:#fff}
+/* ============ SHOP BY CATEGORY ============ */
+.shopcats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:22px 20px 6px}
+.quad-card{background:#fff;padding:18px;border-radius:4px}
+.quad-card h3{margin:0 0 12px;font-size:20px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{aspect-ratio:1/.92;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:46px;border-radius:8px;cursor:pointer;border:1px solid transparent}
+.tile:hover{border-color:#007185}
+.tile span.lbl{font-size:12px;color:#0f1111}
+.see-more{color:#007185;font-size:13px;cursor:pointer;margin-top:12px;display:inline-block;background:none;border:none;padding:0;font-family:inherit}
+.see-more:hover{color:#c7511f;text-decoration:underline}
+/* ============ RESULTS BAR ============ */
+.resultsbar{background:#fff;margin:18px 20px 0;padding:12px 18px;border-bottom:1px solid #d5d9d9;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-radius:4px 4px 0 0}
+.resultsbar .rcount{font-size:14px}
+.sortwrap{font-size:13px;color:#565959}
+.sortwrap select{font-size:13px;padding:6px 8px;border:1px solid #d5d9d9;border-radius:8px;background:#f0f2f2;cursor:pointer;box-shadow:0 2px 5px rgba(213,217,217,.5)}
+/* ============ LAYOUT / SIDEBAR / GRID ============ */
+.layout{display:flex;gap:18px;padding:16px 20px 30px;align-items:flex-start}
+.sidebar{width:205px;flex-shrink:0}
+.fgroup{margin-bottom:22px}
+.fgroup h4{font-size:16px;margin:0 0 8px}
+.frow{display:flex;align-items:center;gap:8px;font-size:14px;margin:7px 0;cursor:pointer;background:none;border:none;padding:0;font-family:inherit;color:#0f1111;text-align:left}
+.frow:hover{color:#c7511f}
+.frow input{accent-color:#e77600;cursor:pointer}
+.frow.starsrow.active{font-weight:700;color:#c7511f}
+.clearf{font-size:13px;color:#007185;background:none;border:none;cursor:pointer;padding:0;font-family:inherit}
+.clearf:hover{text-decoration:underline;color:#c7511f}
+.switch{position:relative;display:inline-block;width:38px;height:20px;flex-shrink:0}
+.switch input{opacity:0;width:0;height:0}
+.slider{position:absolute;inset:0;background:#ccc;border-radius:20px;transition:.25s;cursor:pointer}
+.slider:before{content:"";position:absolute;width:14px;height:14px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.25s}
+.switch input:checked + .slider{background:#e77600}
+.switch input:checked + .slider:before{transform:translateX(18px)}
+.grid-wrap{flex:1;min-width:0}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:#fff;border-radius:4px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .2s}
+.card:hover{box-shadow:0 4px 14px rgba(0,0,0,.14)}
+.pimg{height:185px;display:flex;align-items:center;justify-content:center;position:relative}
+.pemoji{font-size:88px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.25))}
+.badge-new{position:absolute;top:10px;left:10px;background:#ff9900;color:#fff;font-size:11px;font-weight:700;letter-spacing:.5px;padding:4px 9px;border-radius:3px}
+.pbody{padding:12px 14px 16px;display:flex;flex-direction:column;gap:5px;flex:1}
+.ptitle{color:#007185;font-size:14px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-decoration:none;min-height:39px}
+.ptitle:hover{color:#c7511f;text-decoration:underline}
+.pdesc{font-size:12.5px;color:#565959;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ptags{font-size:11.5px;color:#888}
+.rrow{display:flex;align-items:center;gap:6px}
+.stars{position:relative;display:inline-block;font-size:17px;line-height:1;color:#c9c9c9;letter-spacing:1px}
+.stars .fg{position:absolute;left:0;top:0;overflow:hidden;white-space:nowrap;color:#ffa41c}
+.rcount{color:#007185;font-size:13px;text-decoration:none}
+.rcount:hover{text-decoration:underline;color:#c7511f}
+.price{color:#b12704;font-size:22px;font-weight:500;margin-top:2px}
+.price .sym{font-size:13px;vertical-align:top}
+.price .dec{font-size:13px}
+.ship{font-size:12.5px;color:#565959}
+.ship b{color:#0f1111}
+.mit{font-size:12px;color:#565959}
+.stock{color:#007600;font-size:15px}
+.addcart{background:#ffd814;border:1px solid #fcd200;border-radius:20px;padding:8px;font-size:13px;cursor:pointer;margin-top:6px;box-shadow:0 2px 5px rgba(213,217,217,.5);font-family:inherit}
+.addcart:hover{background:#f7ca00}
+.viewcode{color:#007185;font-size:13px;text-align:center;text-decoration:none;margin-top:7px}
+.viewcode:hover{color:#c7511f;text-decoration:underline}
+.empty-results{background:#fff;border-radius:4px;padding:50px 20px;text-align:center;color:#565959;grid-column:1/-1}
+.empty-results h3{color:#0f1111}
+/* ============ BACK TO TOP ============ */
+.btt{background:#37475a;color:#fff;text-align:center;padding:15px;font-size:13px;cursor:pointer}
+.btt:hover{background:#485769}
+/* ============ FOOTER ============ */
+.footer{background:#232f3e;color:#ddd;padding:42px 60px;display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
+.footer h4{color:#fff;font-size:16px;margin:0 0 10px}
+.footer a{color:#ddd;font-size:14px;display:block;margin:9px 0;text-decoration:none}
+.footer a:hover{text-decoration:underline}
+.footer-bottom{background:#131a22;color:#999;text-align:center;padding:22px 16px;font-size:12px;line-height:1.8}
+/* ============ CART DRAWER ============ */
+.backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .3s;z-index:300}
+.backdrop.show{opacity:1;pointer-events:all}
+.drawer{position:fixed;top:0;right:0;width:370px;max-width:94vw;height:100%;background:#fff;transform:translateX(105%);transition:transform .32s ease;z-index:301;display:flex;flex-direction:column;box-shadow:-4px 0 16px rgba(0,0,0,.25)}
+.drawer.open{transform:none}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border-bottom:1px solid #e7e7e7}
+.drawer-head h2{margin:0;font-size:20px}
+.drawer-close{background:none;border:none;font-size:24px;cursor:pointer;color:#565959;line-height:1}
+.drawer-items{flex:1;overflow-y:auto;padding:6px 18px}
+.citem{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #eee}
+.ithumb{width:66px;height:66px;font-size:36px;display:flex;align-items:center;justify-content:center;border-radius:8px;flex-shrink:0}
+.iinfo{flex:1;min-width:0}
+.iname{color:#007185;font-size:13.5px;text-decoration:none;display:block;margin-bottom:4px}
+.iprice{color:#b12704;font-size:15px;font-weight:700}
+.irow{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.iqty{font-size:13px;color:#565959}
+.iremove{background:none;border:none;color:#007185;font-size:13px;cursor:pointer;padding:0;font-family:inherit}
+.iremove:hover{color:#c7511f;text-decoration:underline}
+.cart-empty{text-align:center;color:#565959;padding:50px 10px}
+.cart-empty .big{font-size:56px;display:block;margin-bottom:12px}
+.drawer-foot{padding:16px 18px;border-top:1px solid #e7e7e7;background:#f7f7f7}
+.subtotal{display:flex;justify-content:space-between;font-size:17px;margin-bottom:12px}
+.subtotal b{color:#b12704}
+.checkout{width:100%;background:#ffa41c;border:1px solid #ff8f00;border-radius:20px;padding:11px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 2px 5px rgba(213,217,217,.6);font-family:inherit}
+.checkout:hover{background:#fa8900}
+.freenote{font-size:12px;color:#007600;text-align:center;margin-top:8px}
+/* ============ MODAL ============ */
+.modal-wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:400;opacity:0;pointer-events:none;transition:opacity .25s}
+.modal-wrap.show{opacity:1;pointer-events:all}
+.modal-bg{position:absolute;inset:0;background:rgba(0,0,0,.55)}
+.modal{position:relative;background:#fff;border-radius:10px;padding:34px 30px;max-width:480px;width:92vw;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.35);max-height:90vh;overflow-y:auto}
+.modal h2{margin:0 0 10px;font-size:24px}
+.modal p{color:#565959;font-size:15px;line-height:1.6;margin:0 0 20px}
+.modal .mclose{position:absolute;top:10px;right:14px;background:none;border:none;font-size:22px;cursor:pointer;color:#888}
+.mbtns{display:flex;flex-direction:column;gap:10px}
+.mbtn{background:#ffd814;border:1px solid #fcd200;border-radius:20px;padding:10px;font-size:14px;font-weight:700;color:#0f1111;text-decoration:none;box-shadow:0 2px 5px rgba(213,217,217,.5)}
+.mbtn:hover{background:#f7ca00}
+.mbtn.ghost{background:#fff;border:1px solid #d5d9d9;font-weight:400}
+.mbtn.ghost:hover{background:#f0f2f2}
+/* ============ RESPONSIVE ============ */
+@media (max-width:1150px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:920px){
+  .layout{flex-direction:column}
+  .sidebar{width:100%}
+  .fgroup{display:inline-block;vertical-align:top;margin-right:34px}
+  .shopcats{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:repeat(3,1fr)}
+  .slide h1{font-size:32px}
+}
+@media (max-width:640px){
+  .searchbar{order:10;flex-basis:100%}
+  .account,.returns{display:none}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .footer{grid-template-columns:repeat(2,1fr);padding:30px 22px}
+  .slides{height:300px}
+  .slide h1{font-size:26px}
+  .slide p{font-size:14px}
+  .hero-arrow{width:42px;height:64px;font-size:28px}
+}
+@media (max-width:420px){.grid{grid-template-columns:1fr}.shopcats{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
-<div id="progress"></div>
-
-<nav>
-  <div class="wrap">
-    <a class="logo" href="#top">VK</a>
-    <div class="links">
-      <a href="#about">About</a>
-      <a href="#stack">Stack</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </div>
+<!-- ================= HEADER ================= -->
+<header class="topbar">
+  <div class="logo-wrap" id="logoHome" title="venkat's store">
+    <div class="logo">venkat</div>
+    <svg class="smile" viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M6 3 Q 58 12 106 3" stroke="#ff9900" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M97 0 L110 3 L98 7 Z" fill="#ff9900"/>
+    </svg>
   </div>
-</nav>
-
-<header id="top">
-  <div class="wrap">
-    <span class="kicker">👋 Hi, I'm</span>
-    <h1><span class="name">Venkat</span><br/><span class="typed" id="typed"></span><span class="caret"></span></h1>
-    <p class="lede">I build <b>scalable cloud-native applications</b>, <b>AI-powered data platforms</b>, and modern distributed systems — and I ship side projects for fun.</p>
-    <div class="cta">
-      <a class="btn primary" href="#projects">⚡ View my work</a>
-      <a class="btn ghost" href="https://github.com/venkatk1801" target="_blank" rel="noopener">GitHub profile</a>
-    </div>
-    <div class="socials">
-      <a href="https://www.linkedin.com/in/venkataramana7/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
-      <a href="https://github.com/venkatk1801" target="_blank" rel="noopener" aria-label="GitHub"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
-    </div>
+  <div class="deliver hbtn">
+    <span class="pin">📍</span>
+    <div><div class="small">Deliver to</div><div class="bold">Dallas, TX</div></div>
+  </div>
+  <div class="searchbar">
+    <select id="searchCat" aria-label="Search category">
+      <option value="">All</option>
+      <option>AI &amp; Agents</option>
+      <option>Trading Tools</option>
+      <option>Dev Utilities</option>
+      <option>APIs</option>
+    </select>
+    <input id="searchInput" type="text" placeholder="Search Venkat's open-source projects…" autocomplete="off" aria-label="Search projects">
+    <button id="searchBtn" aria-label="Search">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#131921" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    </button>
+  </div>
+  <a class="account hbtn" href="https://github.com/venkatk1801" target="_blank" rel="noopener">
+    <div class="small">Hello, visitor</div><div class="bold">Account &amp; Lists</div>
+  </a>
+  <a class="returns hbtn" href="https://github.com/venkatk1801" target="_blank" rel="noopener">
+    <div class="small">Returns</div><div class="bold">&amp; Orders</div>
+  </a>
+  <div class="cart hbtn" id="cartBtn" role="button" tabindex="0" aria-label="Open cart">
+    <span class="cart-count" id="cartCount">0</span>
+    <svg width="40" height="34" viewBox="0 0 40 34" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 4 H8 L13 22 H32 L37 9 H10"/><circle cx="15" cy="28" r="2.4" fill="#fff" stroke="none"/><circle cx="30" cy="28" r="2.4" fill="#fff" stroke="none"/>
+    </svg>
+    <div class="bold">Cart</div>
   </div>
 </header>
 
-<main>
-<section id="about">
-  <div class="wrap">
-    <h2><span class="grad">About</span> me</h2><div class="bar"></div>
-    <p class="sub">Cloud Software Engineer • AI Data Engineer — Dallas, TX</p>
-    <div class="about-grid">
-      <ul>
-        <li>☁️ I specialize in <b>cloud-native applications</b> and distributed systems that scale.</li>
-        <li>🤖 I'm deep into <b>Generative AI</b> — LLM-powered solutions, RAG, and intelligent data platforms.</li>
-        <li>⚡ I design <b>batch &amp; real-time data pipelines</b> with Azure, Databricks, Kafka, Snowflake, and PySpark.</li>
-        <li>🚀 Currently exploring <b>AI agents</b>, MCP servers, Azure AI Foundry, and Kubernetes.</li>
-      </ul>
-    </div>
-  </div>
-</section>
+<!-- ================= SUB NAV ================= -->
+<nav class="subnav" id="subnav">
+  <a data-nav="all">☰ All</a>
+  <a data-nav="deals"><span class="deal-dot">●</span> Today's Deals</a>
+  <a data-nav="cat" data-cat="AI &amp; Agents">AI &amp; Agents</a>
+  <a data-nav="cat" data-cat="Trading Tools">Trading Tools</a>
+  <a data-nav="cat" data-cat="Dev Utilities">Dev Utilities</a>
+  <a data-nav="cat" data-cat="APIs">APIs</a>
+  <a data-nav="about">About Me</a>
+</nav>
 
-<section id="stack">
-  <div class="wrap">
-    <h2>Tech <span class="grad">stack</span></h2><div class="bar"></div>
-    <p class="sub">Tools I reach for most — hover them</p>
-    <div class="badges">
-      <span class="badge">Python</span><span class="badge">Java</span><span class="badge">SQL</span>
-      <span class="badge">Azure</span><span class="badge">Databricks</span><span class="badge">PySpark</span>
-      <span class="badge">Apache Spark</span><span class="badge">Kafka</span><span class="badge">Snowflake</span>
-      <span class="badge">dbt</span><span class="badge">Docker</span><span class="badge">Kubernetes</span>
-      <span class="badge">Terraform</span><span class="badge">GitHub Actions</span><span class="badge">Azure DevOps</span>
-      <span class="badge">OpenAI</span><span class="badge">Claude</span><span class="badge">LangChain</span>
-      <span class="badge">Redis</span><span class="badge">Postgres</span><span class="badge">FastAPI</span>
+<!-- ================= HERO CAROUSEL ================= -->
+<section class="hero" id="hero">
+  <div class="slides" id="slides">
+    <div class="slide active" style="background:linear-gradient(115deg,#2b1055 0%,#7597de 100%)">
+      <div class="slide-inner">
+        <span class="eyebrow">✨ Just launched</span>
+        <h1>New arrival: claude-agent-kit</h1>
+        <p>Agentic tool-use loops built from scratch on the Claude API — streaming, per-run cost tracking, prompt caching, and sandboxed tools.</p>
+        <button class="shop-now" data-scroll="#gridSection">Shop now</button>
+      </div>
     </div>
-  </div>
-</section>
-
-<section id="projects">
-  <div class="wrap">
-    <h2>Featured <span class="grad">projects</span></h2><div class="bar"></div>
-    <p class="sub">Things I've built and shipped — click any card for the code</p>
-    <div class="grid">
-      <a class="card reveal" href="https://github.com/venkatk1801/smart-trade-journal" target="_blank" rel="noopener">
-        <div class="ico">📈</div><h3><span class="hl">smart-trade-journal</span></h3>
-        <p>Trading journal with P&amp;L tracking, PDT day-trade warnings, and one-command HTML reports.</p>
-        <div class="tags"><span class="tag">Python</span><span class="tag">CLI</span></div>
-        <div class="go">View on GitHub →</div>
-      </a>
-      <a class="card reveal" href="https://github.com/venkatk1801/jd-matcher" target="_blank" rel="noopener">
-        <div class="ico">🎯</div><h3><span class="hl">jd-matcher</span></h3>
-        <p>Resume vs. job-description keyword gap analyzer — a tailoring guide for every application.</p>
-        <div class="tags"><span class="tag">Python</span><span class="tag">NLP</span></div>
-        <div class="go">View on GitHub →</div>
-      </a>
-      <a class="card reveal" href="https://github.com/venkatk1801/pagesmith" target="_blank" rel="noopener">
-        <div class="ico">✍️</div><h3><span class="hl">pagesmith</span></h3>
-        <p>Zero-dependency static site generator: Markdown in, blog + RSS out, with live reload.</p>
-        <div class="tags"><span class="tag">Python</span><span class="tag">SSG</span></div>
-        <div class="go">View on GitHub →</div>
-      </a>
-      <a class="card reveal" href="https://github.com/venkatk1801/visa-slot-notifier" target="_blank" rel="noopener">
-        <div class="ico">🔔</div><h3><span class="hl">visa-slot-notifier</span></h3>
-        <p>Poll appointment slots with pluggable checkers and get pinged the moment one opens.</p>
-        <div class="tags"><span class="tag">Python</span><span class="tag">Automation</span></div>
-        <div class="go">View on GitHub →</div>
-      </a>
-      <a class="card reveal" href="https://github.com/venkatk1801/bitcoin-price-api" target="_blank" rel="noopener">
-        <div class="ico">₿</div><h3><span class="hl">bitcoin-price-api</span></h3>
-        <p>Real-time Bitcoin price tracker API (FastAPI + CoinGecko) with a live Chart.js dashboard.</p>
-        <div class="tags"><span class="tag">FastAPI</span><span class="tag">JavaScript</span></div>
-        <div class="go">View on GitHub →</div>
-      </a>
-      <a class="card reveal" href="https://github.com/venkatk1801/fast-api-graphQL" target="_blank" rel="noopener">
-        <div class="ico">🔌</div><h3><span class="hl">fast-api-graphQL</span></h3>
-        <p>FastAPI + GraphQL experiments — schemas, resolvers, and API design patterns.</p>
-        <div class="tags"><span class="tag">FastAPI</span><span class="tag">GraphQL</span></div>
-        <div class="go">View on GitHub →</div>
-      </a>
+    <div class="slide" style="background:linear-gradient(115deg,#0b3d3a 0%,#38ef7d 130%)">
+      <div class="slide-inner">
+        <span class="eyebrow">✨ Just launched</span>
+        <h1>New arrival: mcp-market-pulse</h1>
+        <p>Ask the market anything. An MCP server with live market-data tools — quotes, history, RSI and SMA — plus a Claude-powered natural-language client.</p>
+        <button class="shop-now" data-scroll="#gridSection">Shop now</button>
+      </div>
     </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="wrap">
-    <div class="contact-wrap reveal">
-      <div class="contact-box">
-        <h2>Let's build <span class="grad">something</span></h2><div class="bar" style="margin-left:auto;margin-right:auto"></div>
-        <p>Open to Cloud Software Engineering, AI Engineering &amp; Data Engineering opportunities. My inbox is always open.</p>
-        <div class="cta" style="justify-content:center">
-          <a class="btn primary" href="https://www.linkedin.com/in/venkataramana7/" target="_blank" rel="noopener">💼 Connect on LinkedIn</a>
-          <a class="btn ghost" href="https://github.com/venkatk1801" target="_blank" rel="noopener">GitHub</a>
-        </div>
-        <div class="socials">
-          <a href="https://www.linkedin.com/in/venkataramana7/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
-          <a href="https://github.com/venkatk1801" target="_blank" rel="noopener" aria-label="GitHub"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
-        </div>
+    <div class="slide" style="background:linear-gradient(115deg,#7a3b00 0%,#f7b733 130%)">
+      <div class="slide-inner">
+        <span class="eyebrow">✨ Just launched</span>
+        <h1>New arrival: claude-batch-pipeline</h1>
+        <p>Bulk document processing with Anthropic's Batch API and structured outputs — schema validation, cost estimation, and a CLI. Half the price, zero babysitting.</p>
+        <button class="shop-now" data-scroll="#gridSection">Shop now</button>
       </div>
     </div>
   </div>
+  <button class="hero-arrow" id="heroPrev" aria-label="Previous slide">‹</button>
+  <button class="hero-arrow" id="heroNext" aria-label="Next slide">›</button>
+  <div class="hero-dots" id="heroDots"></div>
 </section>
-</main>
 
-<footer>
-  <div class="wrap">
-    <div class="socials">
-      <a href="https://www.linkedin.com/in/venkataramana7/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
-      <a href="https://github.com/venkatk1801" target="_blank" rel="noopener" aria-label="GitHub"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub" /></a>
+<!-- ================= SHOP BY CATEGORY ================= -->
+<section class="shopcats" id="shopcats">
+  <div class="quad-card">
+    <h3>AI &amp; Agents</h3>
+    <div class="tiles">
+      <div class="tile" data-cat="AI &amp; Agents" style="background:linear-gradient(135deg,#ede7f6,#d1c4e9)"><span>🤖</span><span class="lbl">Agents</span></div>
+      <div class="tile" data-cat="AI &amp; Agents" style="background:linear-gradient(135deg,#e0f2f1,#b2dfdb)"><span>🔌</span><span class="lbl">MCP</span></div>
+      <div class="tile" data-cat="AI &amp; Agents" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2)"><span>📦</span><span class="lbl">Batch</span></div>
+      <div class="tile" data-cat="AI &amp; Agents" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0)"><span>🧠</span><span class="lbl">LLMs</span></div>
     </div>
-    © 2026 Venkat · Designed &amp; built by hand, hosted on GitHub Pages
+    <button class="see-more" data-cat="AI &amp; Agents">See more</button>
+  </div>
+  <div class="quad-card">
+    <h3>Trading Tools</h3>
+    <div class="tiles">
+      <div class="tile" data-cat="Trading Tools" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb)"><span>📈</span><span class="lbl">Journal</span></div>
+      <div class="tile" data-cat="Trading Tools" style="background:linear-gradient(135deg,#fff8e1,#ffecb3)"><span>₿</span><span class="lbl">Crypto</span></div>
+      <div class="tile" data-cat="Trading Tools" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9)"><span>📊</span><span class="lbl">Charts</span></div>
+      <div class="tile" data-cat="Trading Tools" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7)"><span>💹</span><span class="lbl">Signals</span></div>
+    </div>
+    <button class="see-more" data-cat="Trading Tools">See more</button>
+  </div>
+  <div class="quad-card">
+    <h3>Dev Utilities</h3>
+    <div class="tiles">
+      <div class="tile" data-cat="Dev Utilities" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0)"><span>🎯</span><span class="lbl">JD Match</span></div>
+      <div class="tile" data-cat="Dev Utilities" style="background:linear-gradient(135deg,#ede7f6,#d1c4e9)"><span>✍️</span><span class="lbl">SSG</span></div>
+      <div class="tile" data-cat="Dev Utilities" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2)"><span>🔔</span><span class="lbl">Alerts</span></div>
+      <div class="tile" data-cat="Dev Utilities" style="background:linear-gradient(135deg,#e0f7fa,#b2ebf2)"><span>🛠️</span><span class="lbl">Tools</span></div>
+    </div>
+    <button class="see-more" data-cat="Dev Utilities">See more</button>
+  </div>
+  <div class="quad-card">
+    <h3>APIs</h3>
+    <div class="tiles">
+      <div class="tile" data-cat="APIs" style="background:linear-gradient(135deg,#fff8e1,#ffecb3)"><span>₿</span><span class="lbl">Prices</span></div>
+      <div class="tile" data-cat="APIs" style="background:linear-gradient(135deg,#e8eaf6,#c5cae9)"><span>🔗</span><span class="lbl">GraphQL</span></div>
+      <div class="tile" data-cat="APIs" style="background:linear-gradient(135deg,#e0f2f1,#b2dfdb)"><span>🌐</span><span class="lbl">REST</span></div>
+      <div class="tile" data-cat="APIs" style="background:linear-gradient(135deg,#fbe9e7,#ffccbc)"><span>⚡</span><span class="lbl">FastAPI</span></div>
+    </div>
+    <button class="see-more" data-cat="APIs">See more</button>
+  </div>
+</section>
+
+<!-- ================= RESULTS BAR ================= -->
+<div class="resultsbar">
+  <div class="rcount" id="resultsCount"></div>
+  <div class="sortwrap">Sort by:
+    <select id="sortSel" aria-label="Sort products">
+      <option value="featured">Featured</option>
+      <option value="newest">Newest Arrivals</option>
+      <option value="az">Name: A to Z</option>
+    </select>
+  </div>
+</div>
+
+<!-- ================= MAIN: SIDEBAR + GRID ================= -->
+<div class="layout" id="gridSection">
+  <aside class="sidebar">
+    <div class="fgroup">
+      <h4>Category</h4>
+      <label class="frow"><input type="checkbox" class="catcheck" value="AI &amp; Agents"> AI &amp; Agents</label>
+      <label class="frow"><input type="checkbox" class="catcheck" value="Trading Tools"> Trading Tools</label>
+      <label class="frow"><input type="checkbox" class="catcheck" value="Dev Utilities"> Dev Utilities</label>
+      <label class="frow"><input type="checkbox" class="catcheck" value="APIs"> APIs</label>
+    </div>
+    <div class="fgroup">
+      <h4>Avg. Customer Review</h4>
+      <button class="frow starsrow" data-stars="4"><span class="stars"><span>★★★★★</span><span class="fg" style="width:80%">★★★★★</span></span> 4★ &amp; up</button>
+      <button class="frow starsrow" data-stars="3"><span class="stars"><span>★★★★★</span><span class="fg" style="width:60%">★★★★★</span></span> 3★ &amp; up</button>
+      <button class="frow starsrow" data-stars="2"><span class="stars"><span>★★★★★</span><span class="fg" style="width:40%">★★★★★</span></span> 2★ &amp; up</button>
+    </div>
+    <div class="fgroup">
+      <h4>New Arrivals</h4>
+      <label class="frow"><span class="switch"><input type="checkbox" id="newOnly"><span class="slider"></span></span> New arrivals only</label>
+    </div>
+    <div class="fgroup">
+      <button class="clearf" id="clearFilters">Clear all filters</button>
+    </div>
+  </aside>
+  <div class="grid-wrap">
+    <div class="grid" id="grid"></div>
+  </div>
+</div>
+
+<!-- ================= BACK TO TOP ================= -->
+<div class="btt" id="backToTop">Back to top</div>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer" id="footer">
+  <div>
+    <h4>Get to Know Me</h4>
+    <a href="https://www.linkedin.com/in/venkataramana7/" target="_blank" rel="noopener">About Venkat</a>
+    <a href="https://github.com/venkatk1801" target="_blank" rel="noopener">GitHub Profile</a>
+    <a href="https://venkatk1801.github.io/" target="_blank" rel="noopener">This Website</a>
+  </div>
+  <div>
+    <h4>My Work</h4>
+    <a href="https://github.com/venkatk1801/claude-agent-kit" target="_blank" rel="noopener">claude-agent-kit</a>
+    <a href="https://github.com/venkatk1801/mcp-market-pulse" target="_blank" rel="noopener">mcp-market-pulse</a>
+    <a href="https://github.com/venkatk1801/claude-batch-pipeline" target="_blank" rel="noopener">claude-batch-pipeline</a>
+    <a href="https://github.com/venkatk1801?tab=repositories" target="_blank" rel="noopener">All Repositories</a>
+  </div>
+  <div>
+    <h4>Connect</h4>
+    <a href="https://www.linkedin.com/in/venkataramana7/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/venkatk1801" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/venkataramana7/" target="_blank" rel="noopener">Email (via LinkedIn)</a>
+  </div>
+  <div>
+    <h4>Open Source</h4>
+    <a href="https://github.com/venkatk1801/claude-agent-kit/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+    <a href="https://github.com/venkatk1801" target="_blank" rel="noopener">Contribute</a>
+    <a href="https://github.com/venkatk1801?tab=repositories" target="_blank" rel="noopener">Star a Repo ⭐</a>
   </div>
 </footer>
+<div class="footer-bottom">
+  © 2026 venkatk1801 · A playful homage — not affiliated with Amazon.com, Inc.<br>
+  Cloud Software Engineer &amp; AI Data Engineer · Dallas, TX
+</div>
+
+<!-- ================= CART DRAWER ================= -->
+<div class="backdrop" id="backdrop"></div>
+<aside class="drawer" id="drawer" aria-label="Shopping cart">
+  <div class="drawer-head">
+    <h2>Shopping Cart <span style="color:#007185" id="drawerCount"></span></h2>
+    <button class="drawer-close" id="drawerClose" aria-label="Close cart">✕</button>
+  </div>
+  <div class="drawer-items" id="drawerItems"></div>
+  <div class="drawer-foot">
+    <div class="subtotal"><span>Subtotal</span><b id="subtotalVal">$0.00</b></div>
+    <button class="checkout" id="checkoutBtn">Proceed to checkout</button>
+    <div class="freenote">Everything here is free and open source 🎉</div>
+  </div>
+</aside>
+
+<!-- ================= CHECKOUT MODAL ================= -->
+<div class="modal-wrap" id="modalWrap">
+  <div class="modal-bg" id="modalBg"></div>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="mclose" id="modalClose" aria-label="Close">✕</button>
+    <h2 id="modalTitle">This one's on the house 🎉</h2>
+    <p>Everything here is free and open source. No card required, no shipping fees, no catch — just grab the code and build something great.</p>
+    <div class="mbtns">
+      <a class="mbtn" href="https://github.com/venkatk1801/claude-agent-kit" target="_blank" rel="noopener">🤖 Get claude-agent-kit</a>
+      <a class="mbtn" href="https://github.com/venkatk1801/mcp-market-pulse" target="_blank" rel="noopener">🔌 Get mcp-market-pulse</a>
+      <a class="mbtn" href="https://github.com/venkatk1801/claude-batch-pipeline" target="_blank" rel="noopener">📦 Get claude-batch-pipeline</a>
+      <a class="mbtn ghost" href="https://github.com/venkatk1801?tab=repositories" target="_blank" rel="noopener">Browse all repos →</a>
+    </div>
+  </div>
+</div>
 
 <script>
-  // typing effect
-  const roles = ["Cloud Software Engineer.", "AI Data Engineer.", "Data Pipeline Builder.", "Side-Project Shipper."];
-  const el = document.getElementById("typed");
-  let ri = 0, ci = 0, del = false;
-  (function tick(){
-    const word = roles[ri];
-    el.textContent = word.slice(0, ci);
-    let wait = del ? 32 : 62;
-    if(!del && ci === word.length){ wait = 1600; del = true; }
-    else if(del && ci === 0){ del = false; ri = (ri + 1) % roles.length; wait = 350; }
-    ci += del ? -1 : 1;
-    setTimeout(tick, wait);
-  })();
+'use strict';
+/* ================= PRODUCT DATA ================= */
+const PRODUCTS = [
+  {name:"claude-agent-kit", repo:"claude-agent-kit", emoji:"🤖", g:["#667eea","#764ba2"], cat:"AI & Agents",
+   desc:"From-scratch agentic tool-use loop on the Claude API: streaming, cost tracking, prompt caching, sandboxed tools.",
+   stars:5.0, ratings:214, isNew:true, tags:["Python","Claude API","Agents"]},
+  {name:"mcp-market-pulse", repo:"mcp-market-pulse", emoji:"🔌", g:["#11998e","#38ef7d"], cat:"AI & Agents",
+   desc:"MCP server with market-data tools (quotes, history, RSI/SMA) plus a Claude-powered natural-language client.",
+   stars:4.9, ratings:187, isNew:true, tags:["Python","MCP","Trading"]},
+  {name:"claude-batch-pipeline", repo:"claude-batch-pipeline", emoji:"📦", g:["#f7971e","#ffd200"], cat:"AI & Agents",
+   desc:"Bulk document processing with Anthropic's Batch API + structured outputs: schema validation, cost estimation, CLI.",
+   stars:4.8, ratings:156, isNew:true, tags:["Python","Batch API"]},
+  {name:"smart-trade-journal", repo:"smart-trade-journal", emoji:"📈", g:["#2193b0","#6dd5ed"], cat:"Trading Tools",
+   desc:"Trading journal with P&L tracking, PDT day-trade warnings, and one-command HTML reports.",
+   stars:4.9, ratings:342, isNew:false, tags:["Python","CLI"]},
+  {name:"bitcoin-price-api", repo:"bitcoin-price-api", emoji:"₿", g:["#f2994a","#f2c94c"], cat:"APIs",
+   desc:"Real-time Bitcoin price tracker API (FastAPI) with a live Chart.js dashboard.",
+   stars:4.7, ratings:289, isNew:false, tags:["FastAPI","JavaScript"]},
+  {name:"fast-api-graphQL", repo:"fast-api-graphQL", emoji:"🔗", g:["#00c9ff","#92fe9d"], cat:"APIs",
+   desc:"FastAPI + GraphQL experiments — schemas, resolvers, and API design patterns.",
+   stars:4.6, ratings:98, isNew:false, tags:["FastAPI","GraphQL"]},
+  {name:"jd-matcher", repo:"jd-matcher", emoji:"🎯", g:["#fc5c7d","#6a82fb"], cat:"Dev Utilities",
+   desc:"Resume vs. job-description keyword gap analyzer — a tailoring guide for every application.",
+   stars:4.8, ratings:176, isNew:false, tags:["Python","NLP"]},
+  {name:"pagesmith", repo:"pagesmith", emoji:"✍️", g:["#a8c0ff","#3f2b96"], cat:"Dev Utilities",
+   desc:"Zero-dependency static site generator: Markdown in, blog + RSS out.",
+   stars:4.9, ratings:231, isNew:false, tags:["Python","SSG"]},
+  {name:"visa-slot-notifier", repo:"visa-slot-notifier", emoji:"🔔", g:["#ff9966","#ff5e62"], cat:"Dev Utilities",
+   desc:"Poll appointment slots with pluggable checkers and get pinged the moment one opens.",
+   stars:4.7, ratings:145, isNew:false, tags:["Python","Automation"]}
+];
+PRODUCTS.forEach((p,i)=>{ p.idx=i; });
 
-  // reveal on scroll
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
-  }), {threshold: .12});
-  document.querySelectorAll(".reveal").forEach(n => io.observe(n));
-  document.querySelectorAll("section .wrap > h2, section .wrap > .sub, .about-grid li, .badge").forEach(n => {
-    n.classList.add("reveal"); io.observe(n);
+/* ================= STATE ================= */
+const state = { q:"", cats:new Set(), minStars:0, newOnly:false, sort:"featured" };
+const cart = [];
+
+/* ================= HELPERS ================= */
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function repoURL(p){ return "https://github.com/venkatk1801/" + p.repo; }
+function scrollElIntoView(el){
+  if(!el || typeof el.scrollIntoView !== "function") return;
+  try{ el.scrollIntoView({behavior:"smooth"}); }catch(e){ try{ el.scrollIntoView(); }catch(_){} }
+}
+function scrollPageTop(){
+  try{ window.scrollTo({top:0,behavior:"smooth"}); }catch(e){ try{ window.scrollTo(0,0); }catch(_){} }
+}
+function starsHTML(s){
+  const pct = (s/5*100).toFixed(1);
+  return '<span class="stars" role="img" aria-label="'+s+' out of 5 stars"><span>★★★★★</span><span class="fg" style="width:'+pct+'%">★★★★★</span></span>';
+}
+
+/* ================= GRID RENDER ================= */
+function cardHTML(p){
+  return '<div class="card">' +
+    '<div class="pimg" style="background:radial-gradient(circle at 50% 42%, rgba(255,255,255,.45), rgba(255,255,255,0) 62%),linear-gradient(135deg,'+p.g[0]+','+p.g[1]+')">' +
+      (p.isNew ? '<span class="badge-new">NEW</span>' : '') +
+      '<span class="pemoji">'+p.emoji+'</span>' +
+    '</div>' +
+    '<div class="pbody">' +
+      '<a class="ptitle" href="'+repoURL(p)+'" target="_blank" rel="noopener">'+esc(p.name)+'</a>' +
+      '<div class="pdesc">'+esc(p.desc)+'</div>' +
+      '<div class="ptags">'+p.tags.map(esc).join(" · ")+'</div>' +
+      '<div class="rrow">'+starsHTML(p.stars)+'<a class="rcount" href="'+repoURL(p)+'" target="_blank" rel="noopener">'+p.ratings+'</a></div>' +
+      '<div class="price"><span class="sym">$</span>0<span class="dec">.00</span></div>' +
+      '<div class="ship"><b>FREE</b> delivery</div>' +
+      '<div class="mit">MIT Licensed</div>' +
+      '<div class="stock">In Stock</div>' +
+      '<button class="addcart" data-add="'+p.repo+'">Add to Cart</button>' +
+      '<a class="viewcode" href="'+repoURL(p)+'" target="_blank" rel="noopener">View Code →</a>' +
+    '</div>' +
+  '</div>';
+}
+
+function visible(){
+  const q = state.q.trim().toLowerCase();
+  const list = PRODUCTS.filter(p=>{
+    if(state.cats.size && !state.cats.has(p.cat)) return false;
+    if(p.stars < state.minStars) return false;
+    if(state.newOnly && !p.isNew) return false;
+    if(q){
+      const hay = (p.name+" "+p.desc+" "+p.cat+" "+p.tags.join(" ")).toLowerCase();
+      if(hay.indexOf(q) === -1) return false;
+    }
+    return true;
   });
+  if(state.sort === "az") list.sort((a,b)=>a.name.localeCompare(b.name));
+  else if(state.sort === "newest") list.sort((a,b)=>((b.isNew?1:0)-(a.isNew?1:0)) || (a.idx-b.idx));
+  return list;
+}
 
-  // scroll progress bar
-  const bar = document.getElementById("progress");
-  addEventListener("scroll", () => {
-    const h = document.documentElement;
-    bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + "%";
-  }, {passive: true});
+function render(){
+  const list = visible();
+  const grid = document.getElementById("grid");
+  grid.innerHTML = list.length
+    ? list.map(cardHTML).join("")
+    : '<div class="empty-results"><h3>No results found</h3><p>Try checking your spelling, removing filters, or using a more general keyword.</p></div>';
+  const n = list.length;
+  let txt = "1–"+n+" of "+n+" result"+(n===1?"":"s");
+  if(state.q.trim()) txt += ' for "'+esc(state.q.trim())+'"';
+  if(state.cats.size) txt += " in " + Array.from(state.cats).map(esc).join(", ");
+  document.getElementById("resultsCount").innerHTML = txt;
+}
+
+/* ================= CATEGORY SYNC ================= */
+function syncCategoryUI(){
+  document.querySelectorAll(".catcheck").forEach(cb=>{ cb.checked = state.cats.has(cb.value); });
+  const sel = document.getElementById("searchCat");
+  sel.value = state.cats.size === 1 ? Array.from(state.cats)[0] : "";
+  document.querySelectorAll("#subnav a[data-nav='cat']").forEach(a=>{
+    a.classList.toggle("active", state.cats.size===1 && state.cats.has(a.dataset.cat));
+  });
+  document.querySelector("#subnav a[data-nav='all']").classList.toggle("active",
+    state.cats.size===0 && !state.newOnly);
+  document.querySelector("#subnav a[data-nav='deals']").classList.toggle("active", state.newOnly);
+}
+function setCats(arr){ state.cats = new Set(arr); syncCategoryUI(); render(); }
+
+/* ================= EVENTS: SEARCH ================= */
+document.getElementById("searchInput").addEventListener("input", e=>{
+  state.q = e.target.value; render();
+});
+document.getElementById("searchCat").addEventListener("change", e=>{
+  setCats(e.target.value ? [e.target.value] : []);
+});
+document.getElementById("searchBtn").addEventListener("click", ()=>{
+  scrollElIntoView(document.getElementById("gridSection"));
+});
+
+/* ================= EVENTS: SUB NAV ================= */
+document.getElementById("subnav").addEventListener("click", e=>{
+  const a = e.target.closest("a"); if(!a) return;
+  const nav = a.dataset.nav;
+  if(nav === "all"){ state.newOnly = false; document.getElementById("newOnly").checked = false; setCats([]); }
+  else if(nav === "deals"){ state.newOnly = true; document.getElementById("newOnly").checked = true; setCats([]); }
+  else if(nav === "cat"){ state.newOnly = false; document.getElementById("newOnly").checked = false; setCats([a.dataset.cat]); }
+  else if(nav === "about"){ scrollElIntoView(document.getElementById("footer")); return; }
+  scrollElIntoView(document.getElementById("gridSection"));
+});
+
+/* ================= EVENTS: QUAD CARDS ================= */
+document.getElementById("shopcats").addEventListener("click", e=>{
+  const t = e.target.closest("[data-cat]"); if(!t) return;
+  state.newOnly = false; document.getElementById("newOnly").checked = false;
+  setCats([t.dataset.cat]);
+  scrollElIntoView(document.getElementById("gridSection"));
+});
+
+/* ================= EVENTS: SIDEBAR ================= */
+document.querySelectorAll(".catcheck").forEach(cb=>{
+  cb.addEventListener("change", ()=>{
+    const checked = Array.from(document.querySelectorAll(".catcheck"))
+      .filter(c=>c.checked).map(c=>c.value);
+    setCats(checked);
+  });
+});
+document.querySelectorAll(".starsrow").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    const v = parseInt(btn.dataset.stars,10);
+    state.minStars = (state.minStars === v) ? 0 : v;
+    document.querySelectorAll(".starsrow").forEach(b=>
+      b.classList.toggle("active", parseInt(b.dataset.stars,10) === state.minStars));
+    render();
+  });
+});
+document.getElementById("newOnly").addEventListener("change", e=>{
+  state.newOnly = e.target.checked; syncCategoryUI(); render();
+});
+document.getElementById("clearFilters").addEventListener("click", ()=>{
+  state.q = ""; document.getElementById("searchInput").value = "";
+  state.minStars = 0;
+  document.querySelectorAll(".starsrow").forEach(b=>b.classList.remove("active"));
+  state.newOnly = false; document.getElementById("newOnly").checked = false;
+  setCats([]);
+});
+document.getElementById("sortSel").addEventListener("change", e=>{
+  state.sort = e.target.value; render();
+});
+
+/* ================= CART ================= */
+function cartQty(){ return cart.reduce((s,i)=>s+i.qty,0); }
+function updateCartUI(){
+  document.getElementById("cartCount").textContent = cartQty();
+  const dc = document.getElementById("drawerCount");
+  dc.textContent = cart.length ? "("+cartQty()+" item"+(cartQty()===1?"":"s")+")" : "";
+  const box = document.getElementById("drawerItems");
+  if(!cart.length){
+    box.innerHTML = '<div class="cart-empty"><span class="big">🛒</span>Your cart is empty.<br>Everything is free — go grab something!</div>';
+    return;
+  }
+  box.innerHTML = cart.map((it,i)=>
+    '<div class="citem">' +
+      '<div class="ithumb" style="background:linear-gradient(135deg,'+it.p.g[0]+','+it.p.g[1]+')">'+it.p.emoji+'</div>' +
+      '<div class="iinfo">' +
+        '<a class="iname" href="'+repoURL(it.p)+'" target="_blank" rel="noopener">'+esc(it.p.name)+'</a>' +
+        '<div class="iprice">$0.00</div>' +
+        '<div class="irow"><span class="iqty">Qty: '+it.qty+'</span>' +
+        '<button class="iremove" data-rm="'+i+'">Remove</button></div>' +
+      '</div>' +
+    '</div>').join("");
+}
+function addToCart(repo){
+  const p = PRODUCTS.find(x=>x.repo===repo); if(!p) return;
+  const ex = cart.find(i=>i.p.repo===repo);
+  if(ex) ex.qty++; else cart.push({p:p, qty:1});
+  updateCartUI(); openDrawer();
+}
+function openDrawer(){
+  document.getElementById("drawer").classList.add("open");
+  document.getElementById("backdrop").classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+function closeDrawer(){
+  document.getElementById("drawer").classList.remove("open");
+  document.getElementById("backdrop").classList.remove("show");
+  document.body.style.overflow = "";
+}
+document.getElementById("grid").addEventListener("click", e=>{
+  const b = e.target.closest("[data-add]"); if(b) addToCart(b.dataset.add);
+});
+document.getElementById("drawerItems").addEventListener("click", e=>{
+  const b = e.target.closest("[data-rm]"); if(!b) return;
+  cart.splice(parseInt(b.dataset.rm,10),1); updateCartUI();
+});
+const cartBtn = document.getElementById("cartBtn");
+cartBtn.addEventListener("click", openDrawer);
+cartBtn.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openDrawer(); } });
+document.getElementById("drawerClose").addEventListener("click", closeDrawer);
+document.getElementById("backdrop").addEventListener("click", closeDrawer);
+
+/* ================= CHECKOUT MODAL ================= */
+function openModal(){
+  closeDrawer();
+  document.getElementById("modalWrap").classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+function closeModal(){
+  document.getElementById("modalWrap").classList.remove("show");
+  document.body.style.overflow = "";
+}
+document.getElementById("checkoutBtn").addEventListener("click", openModal);
+document.getElementById("modalClose").addEventListener("click", closeModal);
+document.getElementById("modalBg").addEventListener("click", closeModal);
+document.addEventListener("keydown", e=>{
+  if(e.key === "Escape"){
+    if(document.getElementById("modalWrap").classList.contains("show")) closeModal();
+    else if(document.getElementById("drawer").classList.contains("open")) closeDrawer();
+  }
+});
+
+/* ================= MISC NAV ================= */
+document.getElementById("backToTop").addEventListener("click", scrollPageTop);
+document.getElementById("logoHome").addEventListener("click", scrollPageTop);
+document.querySelectorAll("[data-scroll]").forEach(b=>{
+  b.addEventListener("click", ()=>{
+    scrollElIntoView(document.querySelector(b.dataset.scroll));
+  });
+});
+
+/* ================= HERO CAROUSEL ================= */
+(function(){
+  const slides = Array.from(document.querySelectorAll("#slides .slide"));
+  const dotsBox = document.getElementById("heroDots");
+  if(!slides.length) return;
+  let cur = 0, timer = null;
+  slides.forEach((_,i)=>{
+    const d = document.createElement("button");
+    d.className = "dot" + (i===0 ? " active" : "");
+    d.setAttribute("aria-label","Go to slide "+(i+1));
+    d.addEventListener("click", ()=>{ show(i); restart(); });
+    dotsBox.appendChild(d);
+  });
+  const dots = Array.from(dotsBox.children);
+  function show(i){
+    cur = (i+slides.length)%slides.length;
+    slides.forEach((s,k)=>s.classList.toggle("active", k===cur));
+    dots.forEach((d,k)=>d.classList.toggle("active", k===cur));
+  }
+  function restart(){ if(timer) clearInterval(timer); timer = setInterval(()=>show(cur+1), 5000); }
+  document.getElementById("heroPrev").addEventListener("click", ()=>{ show(cur-1); restart(); });
+  document.getElementById("heroNext").addEventListener("click", ()=>{ show(cur+1); restart(); });
+  const hero = document.getElementById("hero");
+  hero.addEventListener("mouseenter", ()=>{ if(timer) clearInterval(timer); timer = null; });
+  hero.addEventListener("mouseleave", restart);
+  restart();
+})();
+
+/* ================= INIT ================= */
+updateCartUI();
+syncCategoryUI();
+render();
 </script>
 </body>
 </html>
